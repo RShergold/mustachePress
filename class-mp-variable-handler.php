@@ -19,14 +19,37 @@ class MPVariableHandler {
       return ( have_posts() ) ? new MPPostsIterator : false;
     }
 
-    //is it in data_to_render
-    if ( array_key_exists( $variable_name, $this->data_to_render ) ) {
-      return $this->data_to_render[$variable_name];
-    }
+    //check if we have this in data_to_render
+    $variable_value = $this->get_variable_from_data_to_render( $variable_name );
+    if ($variable_value) return $variable_value;
 
     //try and execute variable as a function
     return $this->execute_variable_as_function( $variable_name );
 
+  }
+
+  private function get_variable_from_data_to_render( $variable_name ) {
+
+    // if object
+    if ( is_object($this->data_to_render) ) {
+
+      //is the varaible a property
+      if ( property_exists($this->data_to_render, $variable_name) )  {
+        return $this->data_to_render->$variable_name;
+      }
+
+      //is the variable a method
+      if ( method_exists($this->data_to_render, $variable_name) ) {
+        return $this->data_to_render->$variable_name();
+      }
+    }
+
+    //if array
+    if ( array_key_exists( $variable_name, $this->data_to_render ) ) {
+      return $this->data_to_render[$variable_name];
+    }
+
+    return false;
   }
 
   private function execute_variable_as_function($function_details) {
