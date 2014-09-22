@@ -8,8 +8,8 @@ class MustachePress {
   function init() {
     self::$settings = array(
       'pragmas' => [Mustache_Engine::PRAGMA_BLOCKS],
-      'loader' => new Mustache_Loader_FilesystemLoader( get_template_directory() ),
-      'partials_loader' => new Mustache_Loader_FilesystemLoader( get_template_directory() )
+      'loader' => self::get_FilesystemLoader(),
+      'partials_loader' => self::get_FilesystemLoader()
     );
   }
 
@@ -26,6 +26,12 @@ class MustachePress {
 
     return self::$mustache_engine->render( $template, new MPVariableHandler($data) );
 
+  }
+
+  private static function get_FilesystemLoader() {
+    $default_views_directory = get_template_directory() . '/views';
+    $mustache_views_directory = ( file_exists($default_views_directory) ) ? $default_views_directory : get_template_directory();
+    return new Mustache_Loader_FilesystemLoader( $mustache_views_directory );
   }
 
 }
