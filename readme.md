@@ -3,6 +3,9 @@ MustachePress.php
 
 A [Wordpress](http://wordpress.com) plugin for using [Mustache](http://mustache.github.com/) tempates.
 
+This is just a very small wrapper around the excellent [Mustache.php](https://github.com/bobthecow/mustache.php) engine by Justin Hileman. Included in this repository (in `/Mustache`) is a complete copy of Mustache.php
+
+It is the version from September 2014. If you would like to update to the newer version simply swap it out. However I can't be sure it will work!
 
 Usage
 -----
