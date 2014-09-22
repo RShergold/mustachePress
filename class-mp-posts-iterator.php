@@ -1,19 +1,25 @@
 <?php
 
 class MPPostsIterator implements Iterator {
-  private $position;
+  private $position,
+    $WP_Query;
 
-  public function __construct() {
+  public function __construct($WP_Query = false) {
     $this->position = 0;
+    $this->WP_Query = $WP_Query;
   }
 
   function rewind() {
-    rewind_posts();
+    if ($this->WP_Query){
+      $this->WP_Query->rewind_posts();
+    } else {
+      rewind_posts();
+    }
     $this->position = 0;
   }
 
   function current() {
-    return the_post();
+    return ($this->WP_Query) ? $this->WP_Query->the_post() : the_post();
   }
 
   function key() {
@@ -25,6 +31,21 @@ class MPPostsIterator implements Iterator {
   }
 
   function valid() {
-    return have_posts();
+    if (!$this->WP_Query) {
+
+      return have_posts();
+
+    } elseif ($this->WP_Query->have_posts()){
+
+      return true;
+
+    } else {
+
+      wp_reset_postdata();
+      return false;
+
+    }
   }
+
+
 }

@@ -24,8 +24,14 @@ class MPVariableHandler {
     if ($variable_value) return $variable_value;
 
     //try and execute variable as a function
-    return $this->execute_variable_as_function( $variable_name );
+    $function_return_data = $this->execute_variable_as_function( $variable_name );
 
+    if ( $function_return_data instanceof WP_Query ) {
+      // the function returned a WP_Query object. set up Iterator for nested The Loop
+      return new MPPostsIterator($function_return_data);
+    }
+
+    return $function_return_data;
   }
 
   private function get_variable_from_data_to_render( $variable_name ) {
