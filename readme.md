@@ -169,7 +169,7 @@ Template location
 -----------------
 By default mustachePress will look for all templates (including partials) in:
 
-`wordpress_template_directory/posts`
+`wordpress_template_directory/views`
 
 if that does not exist it will revert to
 
