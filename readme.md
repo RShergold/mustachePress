@@ -192,7 +192,7 @@ You can change any of the settings for the base [Mustache.php](https://github.co
 For a complete list of options look at the [Constructor options](https://github.com/bobthecow/mustache.php/wiki#constructor-options) for Mustache.php
 
 ###Note
-MustachePress has the [BLOCKS pragma](https://github.com/bobthecow/mustache.php/wiki/BLOCKS-pragma) enabled by default. This is because it is a convenient way of creating a site-wide layout template. this can of corse be turned off by changing the `pragmas` setting.
+MustachePress has the [BLOCKS pragma](https://github.com/bobthecow/mustache.php/wiki/BLOCKS-pragma) enabled by default. This is because it is a convenient way of creating a site-wide layout template. this can of course be turned off by changing the `pragmas` setting.
 
 <br><br><br><br><br>
 
